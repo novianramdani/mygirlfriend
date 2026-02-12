@@ -1,88 +1,85 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Playfair+Display:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Playfair+Display:wght@400..900&family=Poppins:wght@300;400;600&display=swap');
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{ margin: 0; padding: 0; box-sizing: border-box; }
+body { overflow-x: hidden; background-color: #000; color: white; font-family: 'Poppins', sans-serif; }
+
+/* --- HEADER ASLI --- */
+header{ width: 100%; height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+header::after{ content: ""; width: 100%; height: 100vh; background: #000; opacity: 0.55; position: absolute; top: 0; }
+#bg-video{ width: 100%; height: 100vh; position: absolute; object-fit: cover; }
+.video-info{ z-index: 99; position: relative; text-align: center; font-family: "Caveat", cursive; transform: translateY(60px); }
+.video-info h1{ font-family: "Playfair Display", serif; font-size: 3rem; }
+.btn{ padding: 14px 30px; background: #FFB6C1; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; margin-top: 20px; transition: 0.3s; border:none; cursor: pointer; }
+
+/* --- TIMELINE SECTION --- */
+.timeline-section { position: relative; min-height: 100vh; background: #0a0a0a; display: flex; justify-content: center; align-items: center; padding: 50px 20px; z-index: 10; overflow: hidden; }
+#particleCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.8; }
+.content-wrapper { z-index: 2; text-align: center; width: 100%; }
+
+/* --- ORNAMEN JUDUL --- */
+.story-title { font-family: "Playfair Display", serif; font-size: 3.2rem; color: #FFB6C1; letter-spacing: 4px; }
+.side-line span { display: inline-block; width: 50px; height: 2px; background: #FFB6C1; vertical-align: middle; }
+.dot { display: inline-block; width: 12px; height: 12px; border: 2px solid #FFB6C1; border-radius: 50%; vertical-align: middle; margin: 0 10px; }
+.bottom-ornament { margin: 20px 0 50px 0; }
+.long-line { display: inline-block; width: 150px; height: 1.5px; background: rgba(255, 182, 193, 0.4); vertical-align: middle; }
+.dot-center { display: inline-block; width: 15px; height: 15px; border: 2px solid #FFB6C1; border-radius: 50%; position: relative; vertical-align: middle; margin: 0 15px; }
+
+/* --- MENU BUTTONS --- */
+.menu-btn { padding: 20px 40px; background: rgba(255, 255, 255, 0.05); border: 2px solid #FFB6C1; color: white; border-radius: 50px; font-size: 1.3rem; font-family: "Caveat", cursive; cursor: pointer; transition: 0.4s; min-width: 180px; margin: 10px; }
+.menu-btn:hover { background: #FFB6C1; color: #000; box-shadow: 0 0 20px #FFB6C1; }
+
+/* --- MODAL DESIGN (DEEP CHARCOAL & GLOW PINK) --- */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); backdrop-filter: blur(15px); }
+.large-frame { 
+    background: linear-gradient(145deg, #0d0d0d 0%, #1a1a1a 100%);
+    margin: 4vh auto; padding: 40px; 
+    border: 3px solid #FFB6C1; 
+    width: 92%; height: 85vh; border-radius: 20px; 
+    overflow-y: auto; position: relative;
+    box-shadow: 0 0 40px rgba(255, 182, 193, 0.15);
 }
+.close-btn { position: absolute; right: 25px; top: 15px; font-size: 45px; cursor: pointer; color: #FFB6C1; z-index: 100; }
 
-header{
-    width: 100%;
-    height: 100vh;
+/* --- ABOUT YOU LAYOUT --- */
+.about-layout { display: flex; gap: 35px; padding: 20px; align-items: flex-start; flex-wrap: wrap; }
+
+.photo-box { 
+    flex: 0 0 350px; height: 480px; border: 2px solid #fff; 
+    border-radius: 15px; overflow: hidden; background: #000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.photo-box img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.6s ease; }
+
+.text-lines { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+.info-row { 
+    border-left: 4px solid #FFB6C1; 
+    padding: 12px 20px; background: rgba(255, 255, 255, 0.04);
+    border-radius: 0 12px 12px 0; transition: 0.3s;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
+.info-row:hover { background: rgba(255, 182, 193, 0.1); transform: translateX(10px); }
+.info-row::after { content: '✨'; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); opacity: 0.4; }
+.info-row strong { color: #FFB6C1; font-family: "Playfair Display", serif; font-size: 1rem; text-transform: uppercase; display: block; letter-spacing: 1px; }
+.info-row span { font-size: 1.1rem; color: #f0f0f0; line-height: 1.5; }
 
-header::after{
-    content: "";
-    width: 100%;
-    height: 100vh;
-    background: #000000;
-    opacity: 0.5;
-    position: absolute;
-    top: 0;  
-}
+/* --- HEARTS LOOP --- */
+#hearts-container{ position: fixed; width: 100%; height: 100%; pointer-events: none; top: 0; z-index: 999; }
+.heart{ position: absolute; bottom: -50px; width: 20px; height: 20px; background: #ff4d6d; transform: rotate(45deg); animation: floatUp linear forwards; }
+.heart::before, .heart::after{ content: ""; position: absolute; width: 20px; height: 20px; background: #ff4d6d; border-radius: 50%; }
+.heart::before{ top: -10px; left: 0; }
+.heart::after{ left: -10px; top: 0; }
+@keyframes floatUp{ 0% { opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; } }
 
-#bg-video{
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-object-fit: cover;
-}
+#mute-btn{ position: fixed; bottom: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; padding: 12px; border-radius: 50%; color: white; cursor: pointer; z-index: 3000; }
 
-.video-info{
-    z-index: 99;
-    position: relative;
-    color: #ffffff;
-    text-align: center;
-    font-family: "Caveat",sans-serif;
-}
+.hidden { display: none; }
+.fade-out { animation: fadeOut 1s forwards; }
+.fade-in { animation: fadeIn 1s forwards; }
+@keyframes fadeOut { to { opacity: 0; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-.video-info h2{
-    font-family: "Playfair Display",sans-serif;
-    font-weight: 400;
-    font-size: 1.5rem;
-}
-
-.video-info h1{
-    font-family: "Playfair Display",sans-serif;
-    font-weight: 700;
-    font-size: 2.5rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.video-info p{
-    margin-bottom: 2rem;
-}
-
-.btn{
-    padding: 12px 24px;
-    background: #FFB6C1;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    font-family: "Caveat", cursive;
-    font-size: 18px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn:hover{
-      background: #f79fad;
-}
-
-@media screen and (max-width:768px) {
-    .video-info {
-        padding: 1rem;
-    }
-    .video-info h2 {
-        font-size: 1.5rem;
-    }
-    .video-info h1 {
-        font-size: 2rem;
-    }
+@media screen and (max-width: 900px) {
+    .about-layout { flex-direction: column; align-items: center; }
+    .photo-box { width: 100%; max-width: 300px; height: 400px; }
+    .large-frame { width: 95%; height: 90vh; padding: 20px; }
 }

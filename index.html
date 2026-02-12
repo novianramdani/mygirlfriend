@@ -1,41 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>My Divers</title>
-     <link rel=" stylesheet" href="style.css"/>  
-     <!--AOS-->
-     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Love Story - Dina & Vian</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
 
-     <header>
+    <audio id="bg-music" loop>
+        <source src="assets/love.mp3" type="audio/mp3">
+    </audio>
+
+    <button id="mute-btn">🔊</button>
+
+    <header id="intro">
         <video id="bg-video" poster="assets/thumbnail.png" autoplay muted loop>
             <source src="assets/background.mp4" type="video/mp4"/>
         </video>
-        <div class="video-info" data-aos="fade-up" data-aos-duration="2000">
+        <div class="video-info">
             <h3>Hii everyone let me introduce</h3>
             <h4>this is</h4>
-            <h2>Dina Nur Rohimah</h2>
+            <h2 id="typing-name"></h2>
             <h4>is</h4>
             <h1>MY GIRLFRIEND</h1>
             <p>from marvel fans to life partners till the end</p>
-            <a href="" class="btn">Meet My GF</a>
+            <a href="#" class="btn" id="meet-btn">Meet My GF</a>
         </div>
-     </header>
-     <section class="timeline-section" id="timeline">
-        <h2 class="section-title" data-aos="fade-up">This is Our Love Story</h2>
-        <div class="timeline">
-            <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
-                <span class="date"></span>
+    </header>
+
+    <section class="timeline-section hidden" id="timeline">
+        <canvas id="particleCanvas"></canvas>
+        
+        <div class="content-wrapper" data-aos="zoom-in">
+            <div class="story-header">
+                <div class="side-line"><span></span><div class="dot"></div><span></span></div>
+                <h2 class="story-title">THIS IS OUR LOVE STORY</h2>
+                <div class="side-line"><span></span><div class="dot"></div><span></span></div>
+            </div>
+            <div class="bottom-ornament">
+                <div class="long-line"></div>
+                <div class="dot-center"></div>
+                <div class="long-line"></div>
+            </div>
+            
+            <div class="menu-container">
+                <div class="menu-row">
+                    <button class="menu-btn" onclick="openModal('about')">About You</button>
+                    <button class="menu-btn" onclick="openModal('birthday')">Birthday 🎂</button>
+                    <button class="menu-btn" onclick="openModal('journey')">Our Journey</button>
+                </div>
+                <div class="menu-row">
+                    <button class="menu-btn" onclick="openModal('memories')">Memories</button>
+                    <button class="menu-btn" onclick="openModal('future')">Our Future</button>
+                </div>
             </div>
         </div>
-     </section>
-     <!--AOS-->
-     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-     <script>
-        AOS.init();
-     </script>
-    </body>
+    </section>
+
+    <div id="story-modal" class="modal">
+        <div class="modal-content large-frame">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <div id="hearts-container"></div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>
