@@ -43,11 +43,23 @@ header::after{ content: ""; width: 100%; height: 100vh; background: #000; opacit
 /* --- ABOUT YOU LAYOUT --- */
 .about-layout { display: flex; gap: 35px; padding: 20px; align-items: flex-start; flex-wrap: wrap; }
 
-.photo-box { 
-    flex: 0 0 350px; height: 480px; border: 2px solid #fff; 
-    border-radius: 15px; overflow: hidden; background: #000;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+.photo-box {
+    flex: 0 0 350px;
+    width: 350px;
+    height: 480px;
+    min-width: 350px;
+    min-height: 480px;
+    max-width: 350px;
+    max-height: 480px;
+
+    border: 2px solid #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #000;
+
+    position: relative;
 }
+
 .photo-box img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.6s ease; }
 
 .text-lines { flex: 1; display: flex; flex-direction: column; gap: 12px; }
@@ -82,4 +94,339 @@ header::after{ content: ""; width: 100%; height: 100vh; background: #000; opacit
     .about-layout { flex-direction: column; align-items: center; }
     .photo-box { width: 100%; max-width: 300px; height: 400px; }
     .large-frame { width: 95%; height: 90vh; padding: 20px; }
+}
+/* ===================================== */
+/* FULL BACKGROUND KHUSUS ABOUT YOU     */
+/* ===================================== */
+
+/* Override background frame saat About aktif */
+#modal-body .about-scene {
+    margin: -40px;
+    padding: 80px 60px;
+    min-height: calc(85vh + 80px);
+}
+
+/* Hilangkan background charcoal default */
+#story-modal .large-frame:has(.about-scene) {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #1f4068);
+    box-shadow: 0 0 80px rgba(255, 105, 180, 0.4);
+}
+
+/* Glow besar full */
+#story-modal .large-frame:has(.about-scene)::before {
+    content: "";
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(255,182,193,0.25) 0%, transparent 70%);
+    top: -200px;
+    left: -200px;
+    z-index: 0;
+}
+
+#story-modal .large-frame:has(.about-scene)::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,105,180,0.2) 0%, transparent 70%);
+    bottom: -200px;
+    right: -200px;
+    z-index: 0;
+}
+
+/* Pastikan isi tetap di atas */
+#story-modal .large-frame:has(.about-scene) > * {
+    position: relative;
+    z-index: 2;
+}
+/* Scene full & center */
+.about-scene {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Header benar-benar center */
+.about-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.about-header h1 {
+    margin: 0 auto 15px auto;
+}
+
+/* Sparkle container full dan center */
+.sparkle-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+/* ================= SHIMMER TITLE ================= */
+
+.shimmer-title {
+    font-family: "Playfair Display", serif;
+    font-size: 2.8rem;
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(
+        90deg,
+        #ffffff 0%,
+        #ffd1dc 40%,
+        #ffffff 80%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmerMove 4s linear infinite;
+}
+
+@keyframes shimmerMove {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+}
+
+/* ================= FLOATING QUOTE ================= */
+
+.about-quote {
+    margin-top: 15px;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #ffd1dc;
+    opacity: 0;
+    animation: fadeQuote 2s ease forwards;
+    animation-delay: 0.8s;
+}
+
+@keyframes fadeQuote {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* ================= FLOATING ORBS ================= */
+
+.floating-orbs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.floating-orbs span {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255,182,193,0.35) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatOrb 18s infinite linear;
+}
+
+.floating-orbs span:nth-child(1) {
+    top: 10%;
+    left: 20%;
+    animation-duration: 20s;
+}
+.floating-orbs span:nth-child(2) {
+    bottom: 15%;
+    right: 25%;
+    animation-duration: 25s;
+}
+.floating-orbs span:nth-child(3) {
+    top: 50%;
+    left: 60%;
+    animation-duration: 22s;
+}
+.floating-orbs span:nth-child(4) {
+    bottom: 40%;
+    left: 10%;
+    animation-duration: 28s;
+}
+
+@keyframes floatOrb {
+    0% { transform: translateY(0px) translateX(0px); }
+    50% { transform: translateY(-40px) translateX(30px); }
+    100% { transform: translateY(0px) translateX(0px); }
+}
+
+/* ================= PHOTO CAPTION ================= */
+
+.photo-caption {
+    margin-top: 15px;
+    text-align: center;
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    color: #ffd1dc;
+    letter-spacing: 1px;
+    animation: fadeInCaption 2s ease forwards;
+}
+
+@keyframes fadeInCaption {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.about-scene {
+    position: relative;
+    overflow: hidden;
+}
+.photo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* ================= ABOUT ORNAMENT ================= */
+
+.about-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.about-ornament span {
+    width: 80px;
+    height: 1.5px;
+    background: linear-gradient(to right, transparent, #FFB6C1, transparent);
+}
+
+.about-ornament .diamond {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #FFB6C1;
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px rgba(255,182,193,0.6);
+    animation: glowDiamond 3s ease-in-out infinite;
+}
+
+.about-ornament.bottom {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+@keyframes glowDiamond {
+    0% { box-shadow: 0 0 5px rgba(255,182,193,0.4); }
+    50% { box-shadow: 0 0 15px rgba(255,182,193,0.8); }
+    100% { box-shadow: 0 0 5px rgba(255,182,193,0.4); }
+}
+/* --- MARVEL VERTICAL SIGNATURE (FOTO-TEKS-SPIDEY-CAP) --- */
+.marvel-signature-vertical {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px; /* Jarak antar elemen agar tidak tumpang tindih */
+}
+
+.photo-caption {
+    font-size: 1.6rem !important; /* Ukuran teks dipertegas */
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(255, 182, 193, 0.7);
+    margin-bottom: 5px;
+}
+
+/* --- MARVEL IMAGE SIGNATURE --- */
+.marvel-signature-vertical {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Jarak antar ikon */
+}
+
+/* Container Ikon */
+.marvel-icon {
+    width: 120px;  /* Atur ukuran besar kecilnya ikon di sini */
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.3)); /* Glow halus */
+    transition: transform 0.3s ease;
+}
+
+/* Pengaturan Gambar di Dalamnya */
+.marvel-icon img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* --- ANIMASI --- */
+
+/* Spider-Man: Melayang (Floating) */
+.spidey {
+    animation: spideyFloat 4s ease-in-out infinite;
+}
+
+/* Captain America: Berdenyut Pelan (Pulse) */
+/* Karena ini gambar PNG, animasi berputar mungkin kurang cocok kalau bukan bulat sempurna, 
+   jadi kita pakai efek Pulse/Glow saja */
+.cap {
+    animation: capGlow 3s ease-in-out infinite;
+}
+
+/* Efek Gerak Spider-Man */
+@keyframes spideyFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Efek Glow/Nafas untuk Cap */
+@keyframes capGlow {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.3)); }
+    50% { transform: scale(1.08); filter: drop-shadow(0 0 20px rgba(255, 182, 193, 0.6)); }
+}
+
+/* Supaya My Favorite Person tetep cantik */
+.photo-caption {
+    font-size: 1.5rem !important;
+    font-family: "Playfair Display", serif;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+    margin: 10px 0;
+}
+
+/* Hover Effect */
+.marvel-icon:hover {
+    transform: scale(1.2) rotate(5deg);
+    filter: drop-shadow(0 0 25px #FFB6C1);
+}
+/* Animasi Spidey: Floating elegan */
+.spidey {
+    animation: spideyFloat 4s ease-in-out infinite;
+}
+
+/* Animasi Cap: Rotating elegan */
+.cap {
+    animation: capRotate 12s linear infinite;
+}
+
+@keyframes spideyFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); filter: drop-shadow(0 0 20px #FFB6C1); }
+}
+
+@keyframes capRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Responsif untuk HP */
+@media screen and (max-width: 600px) {
+    .marvel-icon {
+        width: 50px;
+        height: 50px;
+    }
+    .photo-caption {
+        font-size: 1.3rem !important;
+    }
 }
