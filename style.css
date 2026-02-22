@@ -44,8 +44,8 @@ header::after{ content: ""; width: 100%; height: 100vh; background: #000; opacit
 .about-layout { display: flex; gap: 35px; padding: 20px; align-items: flex-start; flex-wrap: wrap; }
 
 .photo-box {
-    flex: 0 0 350px;
-    width: 350px;
+    flex: 1 1 300px;
+    width: 100%;
     height: 480px;
     min-width: 350px;
     min-height: 480px;
@@ -58,6 +58,9 @@ header::after{ content: ""; width: 100%; height: 100vh; background: #000; opacit
     background: #000;
 
     position: relative;
+}
+.large-frame {
+    max-width: 1200px;
 }
 
 .photo-box img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.6s ease; }
@@ -428,5 +431,503 @@ header::after{ content: ""; width: 100%; height: 100vh; background: #000; opacit
     }
     .photo-caption {
         font-size: 1.3rem !important;
+    }
+}
+/* Paksa tidak ada scroll ke samping */
+body, html {
+    overflow-x: hidden;
+}
+
+/* Modal jangan bisa geser kiri kanan */
+.large-frame {
+    overflow-x: hidden;
+}
+
+/* Layout jangan melebar keluar */
+.about-layout {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+/* ================= ULTRA PINK BIRTHDAY SCENE ================= */
+
+.birthday-scene {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+/* === ANIMATED PINK GRADIENT BACKGROUND === */
+.birthday-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        #ff0080,
+        #ff4da6,
+        #f358a5,
+        #ff66b2
+    );
+    background-size: 400% 400%;
+    animation: pinkFlow 15s ease infinite;
+    z-index: 0;    animation: pinkFlow 18s ease infinite, zoomBg 20s ease-in-out infinite alternate;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes pinkFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* === FLOATING GLOW CIRCLES === */
+.birthday-bg::before,
+.birthday-bg::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3), transparent);
+    filter: blur(80px);
+    animation: floatGlow 20s ease-in-out infinite alternate;
+}
+
+.birthday-bg::before {
+    top: -200px;
+    left: -200px;
+}
+
+.birthday-bg::after {
+    bottom: -200px;
+    right: -200px;
+    animation-duration: 25s;
+}
+
+@keyframes floatGlow {
+    from { transform: translate(0,0) scale(1); }
+    to { transform: translate(100px,80px) scale(1.2); }
+}
+
+/* === LIGHT BEAM EFFECT === */
+.birthday-scene::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255,255,255,0.25) 50%,
+        transparent 70%
+    );
+    animation: lightMove 6s linear infinite;
+    z-index: 2;
+    mix-blend-mode: screen; /* 🔥 bikin glow nyatu */
+}
+
+@keyframes lightMove {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+/* === CONTENT === */
+.birthday-content {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.birthday-title {
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    color: #fff4e6;
+    text-shadow:
+        0 0 15px rgba(255,182,193,0.6),
+        0 0 30px rgba(255,105,180,0.4);
+    animation: pulseTitle 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseTitle {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}
+
+.birthday-text {
+    margin-top: 20px;
+    font-size: 1.4rem;
+    color: white;
+    max-width: 600px;
+    text-shadow: 0 0 15px rgba(255,255,255,0.5);
+}
+
+/* ================= CONFETTI EXPLOSION ================= */
+
+#confetti-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5000;
+}
+#confetti-container,
+#heart-container {
+    pointer-events: none;
+}
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 14px;
+    border-radius: 2px;
+    opacity: 0.9;
+    animation: explode 4s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: translate(0,0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y)) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@keyframes zoomBg {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+/* ================= HEART FLOAT ================= */
+
+#heart-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.heart {
+    position: absolute;
+    bottom: -50px;
+    width: 15px;
+    height: 15px;
+    background: #ffb6c1;
+    transform: rotate(45deg);
+    animation: floatHeart 6s linear forwards;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #ffb6c1;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -8px;
+    left: 0;
+}
+
+.heart::after {
+    left: -8px;
+    top: 0;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+    }
+}
+/* ================= 3D CAKE ================= */
+
+.cake-wrapper {
+    margin-top: 50px;
+    animation: riseCake 4s cubic-bezier(.17,.67,.83,.67) forwards;
+    transform: translateY(80px);
+    opacity: 0;
+    position: relative;
+    z-index: 10;
+}
+
+
+@keyframes riseCake {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.cake {
+    position: relative;
+    width: 180px;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+}
+
+/* Cake layers */
+
+.layer {
+    width: 170px;
+    height: 40px;
+    border-radius: 12px;
+    position: absolute;
+    left: 0;
+}
+
+.layer-bottom {
+    background: linear-gradient(#ff8fab, #ff4d94);
+    top: 80px;
+}
+
+.layer-middle {
+    background: linear-gradient(#ffc2d1, #ff85a2);
+    top: 40px;
+}
+
+.layer-top {
+    background: linear-gradient(#ffe5ec, #ffb3c6);
+    top: 0;
+}
+
+/* Candle */
+
+.candle {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 30px;
+    background: #ffffff;
+    border-radius: 3px;
+}
+
+/* Flame */
+
+.flame {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 18px;
+    background: radial-gradient(circle, #ffd700 40%, #ff4500);
+    border-radius: 50%;
+    animation: flicker 0.4s infinite alternate;
+    cursor: pointer;
+    z-index: 20;
+    pointer-events: auto;
+}
+
+@keyframes flicker {
+    from {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.9;
+    }
+    to {
+        transform: translateX(-50%) scale(1.15);
+        opacity: 1;
+    }
+}
+/* ================= SMOKE EFFECT ================= */
+
+.smoke {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(200,200,200,0.6), transparent);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    animation: smokeRise 5s ease forwards;
+}
+
+@keyframes smokeRise {
+    0% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateX(-50%) translateY(-80px);
+        opacity: 0;
+    }
+}
+
+/* ================= WISH TEXT ================= */
+
+.wish-text {
+    position: relative;
+    text-align: center;
+    color: #fff4e6;
+    text-shadow: 0 0 15px #ff69b4;
+    z-index: 10;
+    margin-top: 20px;
+    font-size: 1.5rem;
+    animation: fadeWish 1s ease forwards;
+}
+.blow-text {
+    margin-top: 150px;
+    font-size: 1rem;
+    color: white;
+    opacity: 0.9;
+}
+
+@keyframes fadeWish {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+.next-scene-btn {
+    position: relative;
+    z-index: 100;
+    animation: pulseGlow 2s infinite alternate;
+    background: rgba(255, 182, 193, 0.2);
+    border: 2px solid #fff;
+}
+
+@keyframes pulseGlow {
+    from { box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); transform: scale(1); }
+    to { box-shadow: 0 0 25px rgba(255, 182, 193, 0.8); transform: scale(1.05); }
+}
+
+/* ================= FIXED LETTER SCENE ================= */
+.letter-scene {
+    position: absolute; /* 🔥 penting */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* FULL modal */
+
+    background: radial-gradient(circle at center, #0f2027 0%, #090a1f 60%, #000 100%);
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+
+    overflow-y: auto;
+    z-index: 1;
+    scroll-behavior: smooth;
+}
+.letter-scene::-webkit-scrollbar {
+    width: 6px;
+}
+.letter-scene::-webkit-scrollbar-thumb {
+    background: #FFB6C1;
+    border-radius: 10px;
+}
+
+/* 🌌 Layer bintang belakang */
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* ✨ Bintang */
+.star {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 2s infinite ease-in-out;
+}
+
+/* 🌟 Animasi kelap kelip */
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.8); }
+}
+
+/* 🌠 Shooting star */
+.shooting-star {
+    position: fixed;
+    width: 5px;
+    height: 5px;
+    background: white;
+    box-shadow: 0 0 10px white, 0 0 20px white;
+    border-radius: 50%;
+    animation: shoot 2s linear forwards;
+    z-index: 2;
+}
+
+@keyframes shoot {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-400px, 300px);
+        opacity: 0;
+    }
+}
+
+/* 💌 Box surat */
+.letter-box {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 650px;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(18px);
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 
+        0 0 60px rgba(255, 255, 255, 0.08),
+        0 0 120px rgba(255, 182, 193, 0.15);
+    border: 1px solid rgba(255,255,255,0.1);
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeLetter 1.5s ease forwards;
+}
+
+@keyframes fadeLetter {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ✨ Text */
+#letter-text {
+    font-family: "Playfair Display", serif;
+    font-size: 1.25rem;
+    color: #ffffff;
+    line-height: 2;
+    white-space: pre-wrap;
+    text-shadow: 0 0 12px rgba(255,255,255,0.6);
+    text-align: left;
+    animation: glowText 2s ease-in-out infinite alternate;
+}
+
+@keyframes glowText {
+    from {
+        text-shadow: 0 0 5px rgba(255,255,255,0.3);
+    }
+    to {
+        text-shadow: 0 0 15px rgba(255,255,255,0.8);
     }
 }
